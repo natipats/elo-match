@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 @Getter
 @Setter
-public class Player {
+public class RankModel {
 
+    private String exp;
+    private int rankID;
 
 }
