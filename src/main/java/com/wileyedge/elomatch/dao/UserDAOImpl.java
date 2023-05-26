@@ -1,4 +1,4 @@
 package com.wileyedge.elomatch.dao;
 
-public class ToxicDAOImpl {
+public class UserDAOImpl {
 }

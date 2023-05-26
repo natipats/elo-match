@@ -1,4 +1,4 @@
 package com.wileyedge.elomatch.controller;
 
-public class PlayerController {
+public class RankController {
 }
