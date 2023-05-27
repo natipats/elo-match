@@ -14,7 +14,14 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 // and it is now mapped to a database.
 @Entity
 @Table(name="user")
+// Add a no-argument constructor
+// This annotation generates a constructor with no arguments for the class.
+// It allows creating instances of the class without providing any initial values for its fields.
 @NoArgsConstructor
+// Add a constructor with arguments for all fields
+// This annotation generates a constructor that accepts arguments for all fields in the class.
+// It simplifies the process of initialising objects by automatically creating a constructor
+// that sets values for all fields.
 @AllArgsConstructor
 public class UserModel {
 
@@ -33,15 +40,15 @@ public class UserModel {
             strategy = SEQUENCE,
             generator = "user_sequence"
     )
-    @Column(name = "userid", updatable = false)
+    @Column(name = "user_id", updatable = false)
     private long userid;
-    @Column(name = "playerName", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "player_name", nullable = false, columnDefinition = "TEXT")
     private String playerName;
-    @Column(name = "userName", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "user_name", nullable = false, columnDefinition = "TEXT")
     private String userName;
     @Column(name = "elo")
     private long elo;
-    @Column(name = "isToxic")
+    @Column(name = "is_toxic")
     private boolean isToxic;
 
 }
