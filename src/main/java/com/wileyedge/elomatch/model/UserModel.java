@@ -33,11 +33,11 @@ public class UserModel {
             strategy = SEQUENCE,
             generator = "user_sequence"
     )
-    @Column(name = "userid")
-    private int userid;
-    @Column(name = "playerName")
+    @Column(name = "userid", updatable = false)
+    private long userid;
+    @Column(name = "playerName", nullable = false, columnDefinition = "TEXT")
     private String playerName;
-    @Column(name = "userName")
+    @Column(name = "userName", nullable = false, columnDefinition = "TEXT")
     private String userName;
     @Column(name = "elo")
     private long elo;
