@@ -1,9 +1,9 @@
 package com.wileyedge.elomatch.view;
 
-public class View {
+public class UserInteractionController {
     UserIO io;
 
-        public View(UserIO io){this.io = io;}
+        public UserInteractionController(UserIO io){this.io = io;}
 
 
     public int printMenuAndGetSelection() {
