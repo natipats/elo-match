@@ -1,5 +1,7 @@
 package com.wileyedge.elomatch.model;
 
+import com.wileyedge.elomatch.persistence.UserRepository;
+import com.wileyedge.elomatch.service.UserServiceImpl;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,19 +38,31 @@ public class UserModel {
             allocationSize = 1
     )
     // the generated value will be a sequence.
+    // SEQUENCE, indicating that the primary key values for the annotated entity
+    // will be generated using a database sequence.
     @GeneratedValue(
             strategy = SEQUENCE,
             generator = "user_sequence"
     )
-    @Column(name = "user_id", updatable = false)
-    private Long userid;
+    @Column(name = "user_id", nullable = false)
+    private Integer userid;
     @Column(name = "player_name", nullable = false, columnDefinition = "TEXT")
     private String playerName;
     @Column(name = "user_name", nullable = false, columnDefinition = "TEXT")
     private String userName;
     @Column(name = "elo")
     private long elo;
-    @Column(name = "is_toxic")
+    @Column(name = "is_toxic", columnDefinition = "BIT(1)")
     private boolean isToxic;
 
+    @ManyToOne
+    @JoinColumn(name = "ranking_id")
+    private RankModel ranking;
+
+    public UserModel(String playerName, String userName, long elo, boolean isToxic) {
+        this.playerName = playerName;
+        this.userName = userName;
+        this.elo = elo;
+        this.isToxic = isToxic;
+    }
 }
