@@ -1,5 +1,6 @@
 package com.wileyedge.elomatch.persistence;
 
+import com.wileyedge.elomatch.model.RankModel;
 import com.wileyedge.elomatch.model.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,5 +16,16 @@ import org.springframework.stereotype.Repository;
 // for common database operations, such as creating, reading, updating, and deleting.
 
 @Repository
-public interface UserRepository extends JpaRepository<UserModel, Long> {
+public interface UserRepository extends JpaRepository<UserModel, Integer> {
+
+//    RankModel getRanking = new RankModel();
+//    RankModel beginner = new RankModel();
+
+//    @Override
+//    UserModel getReferenceById(Integer integer);
+//     beginner.setRankingId(1);
+//     beginner.setExp("Beginner");
+//
+//     getRanking.save();
+
 }
