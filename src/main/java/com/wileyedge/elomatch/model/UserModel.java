@@ -45,7 +45,7 @@ public class UserModel {
             generator = "user_sequence"
     )
     @Column(name = "user_id", nullable = false)
-    private Integer userid;
+    private Integer user_id;
     @Column(name = "player_name", nullable = false, columnDefinition = "TEXT")
     private String playerName;
     @Column(name = "user_name", nullable = false, columnDefinition = "TEXT")
