@@ -27,10 +27,10 @@ public class User {
 
     // This will represent the entity in the database.
 
-    @Id
+    @Id // specifies the primary key column in the database table.
      //sequence will increase by 1 as default value.
      //So it'll start at 1 counting up to 2, 3, 4, 5, 6, 7, 8, 9, 10 etc
-    @SequenceGenerator(
+    @SequenceGenerator(   //  defines a sequence generator for the primary key values.
             name = "user_sequence",
             sequenceName = "user_sequence",
             allocationSize = 1
@@ -38,7 +38,7 @@ public class User {
      //the generated value will be a sequence.
      //SEQUENCE, indicating that the primary key values for the annotated entity
      //will be generated using a database sequence.
-    @GeneratedValue(
+    @GeneratedValue( // specifies the strategy for generating primary key values, using the sequence generator defined.
             strategy = SEQUENCE,
             generator = "user_sequence"
     )
@@ -54,6 +54,8 @@ public class User {
     @Column(name = "is_toxic", columnDefinition = "BIT(1)")
     private Boolean isToxic;
 
+    // We have included a ManyToOne relationship with the Experience entity,
+    // specifying that multiple users can be associated with a single experience.
     @ManyToOne
     @JoinColumn(name = "experience_id")
     private Experience experience;
