@@ -1,4 +1,4 @@
-package com.wileyedge.elomatch.model;
+package com.wileyedge.elomatch.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,17 +13,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class RankModel {
+@Table(name = "experience")
+public class Experience {
 
     @Id
-    @Column(name = "ranking_id", nullable = false)
-    private Integer ranking_id;
+    @Column(name = "id", nullable = false)
+    private Long id;
     @Column(name = "exp")
     private String exp;
 
 
-    @OneToMany(mappedBy = "ranking", cascade = CascadeType.ALL)
-    private List<UserModel> userid;
+    @OneToMany(mappedBy = "experience", cascade = CascadeType.ALL)
+    private List<User> users;
 
 
 }
