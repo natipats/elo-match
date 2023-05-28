@@ -30,20 +30,21 @@ public class UserModel {
     // This will represent the entity in the database.
 
     @Id
-    // sequence will increase by 1 as default value.
-    // So it'll start at 1 counting up to 2, 3, 4, 5, 6, 7, 8, 9, 10 etc
+     //sequence will increase by 1 as default value.
+     //So it'll start at 1 counting up to 2, 3, 4, 5, 6, 7, 8, 9, 10 etc
     @SequenceGenerator(
             name = "user_sequence",
             sequenceName = "user_sequence",
             allocationSize = 1
     )
-    // the generated value will be a sequence.
-    // SEQUENCE, indicating that the primary key values for the annotated entity
-    // will be generated using a database sequence.
+     //the generated value will be a sequence.
+     //SEQUENCE, indicating that the primary key values for the annotated entity
+     //will be generated using a database sequence.
     @GeneratedValue(
             strategy = SEQUENCE,
             generator = "user_sequence"
     )
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
     private Integer user_id;
     @Column(name = "player_name", nullable = false, columnDefinition = "TEXT")
@@ -64,5 +65,6 @@ public class UserModel {
         this.userName = userName;
         this.elo = elo;
         this.isToxic = isToxic;
+
     }
 }

@@ -9,9 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Component
-public class UserServiceImpl implements UserServiceInterface {
+public class RankService {
 
     @Autowired
-    private final UserRepository userRepository;
-
+    private UserRepository rankingAttached;
 }

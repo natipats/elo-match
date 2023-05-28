@@ -21,6 +21,7 @@ public class RankModel {
     @Column(name = "exp")
     private String exp;
 
+
     @OneToMany(mappedBy = "ranking", cascade = CascadeType.ALL)
     private List<UserModel> userid;
 
