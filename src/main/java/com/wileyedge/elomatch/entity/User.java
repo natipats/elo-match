@@ -1,7 +1,5 @@
-package com.wileyedge.elomatch.model;
+package com.wileyedge.elomatch.entity;
 
-import com.wileyedge.elomatch.persistence.UserRepository;
-import com.wileyedge.elomatch.service.UserServiceImpl;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +23,7 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 // It simplifies the process of initialising objects by automatically creating a constructor
 // that sets values for all fields.
 @AllArgsConstructor
-public class UserModel {
+public class User {
 
     // This will represent the entity in the database.
 
@@ -45,22 +43,22 @@ public class UserModel {
             generator = "user_sequence"
     )
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", nullable = false)
-    private Integer user_id;
+    @Column(name = "id", nullable = false)
+    private Long id;
     @Column(name = "player_name", nullable = false, columnDefinition = "TEXT")
     private String playerName;
     @Column(name = "user_name", nullable = false, columnDefinition = "TEXT")
     private String userName;
     @Column(name = "elo")
-    private long elo;
+    private Long elo;
     @Column(name = "is_toxic", columnDefinition = "BIT(1)")
-    private boolean isToxic;
+    private Boolean isToxic;
 
     @ManyToOne
-    @JoinColumn(name = "ranking_id")
-    private RankModel ranking;
+    @JoinColumn(name = "experience_id")
+    private Experience experience;
 
-    public UserModel(String playerName, String userName, long elo, boolean isToxic) {
+    public User(String playerName, String userName, Long elo, Boolean isToxic) {
         this.playerName = playerName;
         this.userName = userName;
         this.elo = elo;
