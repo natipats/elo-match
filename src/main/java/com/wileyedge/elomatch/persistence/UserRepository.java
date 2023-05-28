@@ -1,7 +1,6 @@
 package com.wileyedge.elomatch.persistence;
 
-import com.wileyedge.elomatch.model.RankModel;
-import com.wileyedge.elomatch.model.UserModel;
+import com.wileyedge.elomatch.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,9 +15,15 @@ import org.springframework.stereotype.Repository;
 // for common database operations, such as creating, reading, updating, and deleting.
 
 @Repository
-public interface UserRepository extends JpaRepository<UserModel, Integer> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-//    RankModel getRanking = new RankModel();
+    // next time that optional would be better solution next time.
+    // this will allow you to create an option incase userName does not appear.
+    User findByUserName(String userName);
+
+
+
+    //    RankModel getRanking = new RankModel();
 //    RankModel beginner = new RankModel();
 
 //    @Override
