@@ -1,11 +1,10 @@
 package com.wileyedge.elomatch.service;
 
 import com.wileyedge.elomatch.entity.User;
-import com.wileyedge.elomatch.model.ModifyUser;
+import com.wileyedge.elomatch.model.CreateOrModifyUser;
 import com.wileyedge.elomatch.persistence.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserServiceInterface {
+public class UserService {
 
     @Autowired
     private final UserRepository userRepository;
@@ -29,15 +28,16 @@ public class UserServiceImpl implements UserServiceInterface {
         return userRepository.saveAll(users);
     }
 
-    public List<User> getUsers(){
+    public List<User> findUsers(){
         return userRepository.findAll();
     }
-
-    public User getUserById(Long id){
+// find
+    public User findUserById(Long id){
         return userRepository.findById(id).orElse(null);
     }
 
-    public User getUserByName(String userName){
+
+    public User findUserByName(String userName){
         return userRepository.findByUserName(userName);
     }
    // try to keep delete as void or if you want to keep back anything then keep as boolean
@@ -46,14 +46,14 @@ public class UserServiceImpl implements UserServiceInterface {
        return "User removed " + id;
     }
 
-    public User updateUser(Long id, ModifyUser modifyUser) {
+    public User updateUser(Long id, CreateOrModifyUser createOrModifyUser) {
         // existing user id which comes from the database from particular id search
         // and then that will be the existing whole user. with all fields, and original.
         User existingUser = userRepository.findById(id).orElse(null);
         // .1 found
         // .2 set modification fields inside
-        Objects.requireNonNull(existingUser).setUserName(modifyUser.getUserName());
-        existingUser.setPlayerName(modifyUser.getPlayerName());
+        Objects.requireNonNull(existingUser).setUserName(createOrModifyUser.getUserName());
+        existingUser.setPlayerName(createOrModifyUser.getPlayerName());
 //        existingUser.setUserName(user.getUserName());
 //        existingUser.setPlayerName(user.getPlayerName());
 //        existingUser.setElo(user.getElo());
