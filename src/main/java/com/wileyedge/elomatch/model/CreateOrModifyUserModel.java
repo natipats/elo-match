@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateOrModifyUser {
+public class CreateOrModifyUserModel {
 
     // you only need the playerName and UserName to modify the user
     // you wouldn't allow the user to change rank or change the istoxic player otherwise
