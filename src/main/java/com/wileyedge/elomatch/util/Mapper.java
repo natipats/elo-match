@@ -2,9 +2,10 @@ package com.wileyedge.elomatch.util;
 
 import com.wileyedge.elomatch.entity.User;
 import com.wileyedge.elomatch.model.CreateOrModifyUserModel;
+import com.wileyedge.elomatch.model.UserModel;
 import org.modelmapper.ModelMapper;
 
-public class UserMapper {
+public class Mapper {
 
     // placing all static mapper methods in this class.
     private static final ModelMapper modelMapper = new ModelMapper();
@@ -21,9 +22,14 @@ public class UserMapper {
     public static User mapUserEntityToModel(CreateOrModifyUserModel model){
         return modelMapper.map(model, User.class);
     }
-    private UserMapper(){
 
+
+    public static UserModel mapUserEntityToModel(User user){
+        return modelMapper.map(user, UserModel.class);
     }
 
+    private Mapper(){
+
+    }
 
 }
