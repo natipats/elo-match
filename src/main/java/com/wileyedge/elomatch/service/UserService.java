@@ -1,8 +1,10 @@
 package com.wileyedge.elomatch.service;
 
 import com.wileyedge.elomatch.entity.User;
-import com.wileyedge.elomatch.model.CreateOrModifyUser;
+import com.wileyedge.elomatch.model.CreateOrModifyUserModel;
+import com.wileyedge.elomatch.model.UserModel;
 import com.wileyedge.elomatch.persistence.UserRepository;
+import com.wileyedge.elomatch.util.Mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,25 +43,29 @@ public class UserService {
         return userRepository.findByUserName(userName);
     }
    // try to keep delete as void or if you want to keep back anything then keep as boolean
+
     public String deleteUser(Long id){
        userRepository.deleteById(id);
        return "User removed " + id;
     }
 
-    public User updateUser(Long id, CreateOrModifyUser createOrModifyUser) {
+    public UserModel updateUser(Long id, CreateOrModifyUserModel createOrModifyUserModel) {
         // existing user id which comes from the database from particular id search
         // and then that will be the existing whole user. with all fields, and original.
         User existingUser = userRepository.findById(id).orElse(null);
         // .1 found
         // .2 set modification fields inside
-        Objects.requireNonNull(existingUser).setUserName(createOrModifyUser.getUserName());
-        existingUser.setPlayerName(createOrModifyUser.getPlayerName());
+        Objects.requireNonNull(existingUser).setUserName(createOrModifyUserModel.getUserName());
+        existingUser.setPlayerName(createOrModifyUserModel.getPlayerName());
+        existingUser.setElo(createOrModifyUserModel.getElo());
+        existingUser.setIsToxic(createOrModifyUserModel.getIsToxic());
 //        existingUser.setUserName(user.getUserName());
 //        existingUser.setPlayerName(user.getPlayerName());
 //        existingUser.setElo(user.getElo());
         // existingUser. need to figure out isToxic, not appearing as get method.
-        return userRepository.save(existingUser);
+        return Mapper.mapUserEntityToModel(userRepository.save(existingUser));
     }
+
 
 //    public UserModel updateUser(UserModel user) {
 //        UserModel existingUser = userRepository.findById(user.getUser_id()).orElse(null);
