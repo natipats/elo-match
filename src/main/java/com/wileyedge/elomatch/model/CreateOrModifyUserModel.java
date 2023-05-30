@@ -18,4 +18,6 @@ public class CreateOrModifyUser {
     // which will identify them as beginner status.
     private String playerName;
     private String userName;
+    private Long elo;
+    private Boolean isToxic;
 }
