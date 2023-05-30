@@ -3,7 +3,7 @@
 
 ### ♝ Code Requirements
 * [ ] Set up packages for methods.
-* [ ] The controller of the program needs to be able to instert into database,
+* [ ] The controller of the program needs to be able to insert into database,
 * [ ] Method to delete entries by id
 * [ ] Method to update them by id
 * [ ] Method to read all
