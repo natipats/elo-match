@@ -71,6 +71,55 @@
         </div>
     </div>
 </header>
+
+
+<!-- Main choice to display users data -->
+<section class="user-container">
+    <div class="row m-4">
+        <div class="col text-center border border-dark">
+            <h1><a href="/" class="text-dark"> === Users ===</a></h1>
+        </div>
+    </div>
+    <div class="row m-4 border border-dark">
+        <div class="col text-center m-3">
+            <a href="users" class="btn btn-outline-primary btn-lg">Teachers</a>
+        </div>
+        <div class="col text-center m-3">
+            <a href="admins" class="btn btn-outline-primary btn-lg">Students</a>
+        </div>
+    </div>
+    <div class="row m-4 border border-dark">
+        <div class="col text-center m-3">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Player Name</th>
+                    <th>User Name</th>
+                    <th>Elo</th>
+                    <th>isToxic</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}">Teacher ID</td>
+                    <td th:text="${user.playerName}">Player Name</td>
+                    <td th:text="${user.userName}">User Name</td>
+                    <td th:text="${user.elo}">Elo</td>
+                    <td th:text="${user.isToxic}">isToxic</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+
 <!-- Icons Grid-->
 <section class="features-icons bg-light text-center">
     <div class="container">
