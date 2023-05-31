@@ -52,7 +52,8 @@ public class User {
     @Column(name = "elo")
     private Long elo;
     @Column(name = "is_toxic", columnDefinition = "BIT(1)")
-    private Boolean isToxic;
+    private Boolean isToxic; // We can now use a BIT column to store one or many true/false values in a single column.
+    // BIT(1) defines a field that contains a single bit.
 
     // We have included a ManyToOne relationship with the Experience entity,
     // specifying that multiple users can be associated with a single experience.
