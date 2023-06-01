@@ -10848,6 +10848,11 @@ textarea.form-control-lg {
   font-size: 4.5rem;
 }
 
+.chess-icon {
+font-size: 4.5rem;
+fill: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
+}
+
 header.masthead {
   position: relative;
   background-color: #343a40;
