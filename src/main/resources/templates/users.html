@@ -10,15 +10,19 @@
   <tr>
     <th> User Name </th>
     <th> Player Name </th>
+    <th> Elo </th>
+    <th> Player Toxic or Not ??? </th>
   </tr>
   </thead>
   <tbody>
   <tr th:if="${users.empty}">
-    <td colspan="2"> No Books Available </td>
+    <td colspan="4"> No Users Available at this time!!! </td>
   </tr>
   <tr th:each="user : ${users}">
     <td><span th:text="${user.getUserName()}"> User Name </span></td>
     <td><span th:text="${user.getPlayerName()}"> player Name </span></td>
+    <td><span th:text="${user.getElo()}"> Elo </span></td>
+    <td><span th:text="${user.getIsToxic()}"> Toxic level </span></td>
   </tr>
   </tbody>
 </table>
