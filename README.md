@@ -1,6 +1,10 @@
 
 # ♜ ELOmatch ♟️
 
+## Designed and Developed by:
+- [Rodrigo](https://github.com/natipats)
+- [Peter](https://github.com/PJSalter)
+
 # Instructions:
 To start the program simply click the green arrow, wait a few seconds, and in your preferred 
 browser of choice search up http://localhost:8080/. Once you're 
@@ -21,6 +25,7 @@ TBD
 
 ## ♝ Code Requirements
 * [x] Set up packages for methods.
+
 * [ ] The controller of the program needs to be able to insert into database,
 * [ ] Method to delete entries by id
 * [ ] Method to update them by id
@@ -36,3 +41,13 @@ TBD
 * [x] schema.sql is submitted
 * [x] Boostrap as GUI
 * [x] version control set-up and functional
+
+# 🧩Diary
+
+- Step by step planning, work structure and organisation 🧪 [here on hackmd](https://hackmd.io/z-Ssv-XUR9G8ZmHGM9cYiw?both) 👨🏼‍💻
+
+![EloMatch.png](src%2Fmain%2Fresources%2Fstatic%2Fimg%2FEloMatch.png)
+
+# ✨Database:
+
+![database.png](..%2Fdatabase.png)
