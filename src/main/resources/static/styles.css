@@ -324,6 +324,16 @@ figure {
     display: block;
 }
 
+.logo-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer-logo{
+  max-width: 100%;
+  height: auto;
+}
+
 img,
 svg {
   vertical-align: middle;
