@@ -39,6 +39,18 @@ public class UserService {
     }
 
 
+//    public BigDecimal checkEloByLength(BigDecimal elo) throws ELOMaximumException {
+//       if(elo.compareTo(new BigDecimal("2000")) > 3000){
+//           throw new ELOMaximumException(
+//                   "ERROR: NO NO NO elo is not more than 3000"
+//           );
+//       }
+//       return elo;
+//    }
+
+
+
+
     public User findUserByName(String userName){
         return userRepository.findByUserName(userName);
     }
@@ -57,7 +69,7 @@ public class UserService {
         // .2 set modification fields inside
         Objects.requireNonNull(existingUser).setUserName(createOrModifyUserModel.getUserName());
         existingUser.setPlayerName(createOrModifyUserModel.getPlayerName());
-        existingUser.setElo(createOrModifyUserModel.getElo());
+        existingUser.setElo((long) Math.toIntExact(createOrModifyUserModel.getElo()));
         existingUser.setIsToxic(createOrModifyUserModel.getIsToxic());
 //        existingUser.setUserName(user.getUserName());
 //        existingUser.setPlayerName(user.getPlayerName());
