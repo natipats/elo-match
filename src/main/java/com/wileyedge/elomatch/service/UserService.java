@@ -1,6 +1,7 @@
 package com.wileyedge.elomatch.service;
 
 import com.wileyedge.elomatch.entity.User;
+import com.wileyedge.elomatch.exception.ELOMaximumException;
 import com.wileyedge.elomatch.model.CreateOrModifyUserModel;
 import com.wileyedge.elomatch.model.UserModel;
 import com.wileyedge.elomatch.persistence.UserRepository;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,14 +41,14 @@ public class UserService {
     }
 
 
-//    public BigDecimal checkEloByLength(BigDecimal elo) throws ELOMaximumException {
-//       if(elo.compareTo(new BigDecimal("2000")) > 3000){
-//           throw new ELOMaximumException(
-//                   "ERROR: NO NO NO elo is not more than 3000"
-//           );
-//       }
-//       return elo;
-//    }
+    public BigDecimal checkEloByLength(BigDecimal elo) throws ELOMaximumException {
+       if(elo.compareTo(new BigDecimal("2000")) > 3000){
+           throw new ELOMaximumException(
+                   "ERROR: NO NO NO elo is not more than 3000"
+           );
+       }
+       return elo;
+    }
 
 
 
