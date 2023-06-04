@@ -10,6 +10,8 @@
     <link rel="icon" type="img/x-icon" href="../static/favicon.ico" />
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome icons-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="screen" />
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -19,18 +21,22 @@
 <!-- Navigation-->
 <nav class="navbar navbar-light bg-light static-top">
     <div class="container">
-        <a class="navbar-brand" href="#!">Start Bootstrap</a>
+        <a class="navbar-brand"  href="#!">
+            <img src="../static/img/EloMatch.png" width="200" th:src="@{img/EloMatch.png}" alt="elo-match-logo"/>
+        </a>
         <a class="btn btn-primary" href="#signup">Sign Up</a>
     </div>
 </nav>
 <!-- Masthead-->
-<header class="masthead" style="background-image">
+<div class="check-mate">
+<header class="masthead">
+
     <div class="container position-relative">
         <div class="row justify-content-center">
             <div class="col-xl-6">
                 <div class="text-center text-white">
                     <!-- Page heading-->
-                    <h1 class="mb-5">Generate more leads with a professional landing page!</h1>
+                    <h1 class="mb-5">Elevate your chess game with EloMatch - where fair play meets perfect matches!</h1>
                     <!-- Signup form-->
                     <!-- * * * * * * * * * * * * * * *-->
                     <!-- * * SB Forms Contact Form * *-->
@@ -47,7 +53,7 @@
                                 <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Email Address is required.</div>
                                 <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
                             </div>
-                            <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
+                            <div class="col-auto"><button class="btn btn-primary btn-lg hover" id="submitButton" type="submit">Submit</button></div>
                         </div>
                         <!-- Submit success message-->
                         <!---->
@@ -71,29 +77,68 @@
         </div>
     </div>
 </header>
+</div>
+
+
+<!-- Main choice to display users data -->
+<section class="user-container">
+    <div class="row m-4">
+        <div class="col text-center border border-dark">
+            <h1><a href="/" class="text-dark"> === EloMatch ===</a></h1>
+        </div>
+    </div>
+    <div class="row m-4 border border-dark">
+        <div class="col text-center m-3">
+            <a href="/users" class="btn btn-outline-primary btn-lg">Users Info</a>
+        </div>
+        <div class="col text-center m-3">
+            <a href="admins" class="btn btn-outline-primary btn-lg">Experience from Users</a>
+        </div>
+    </div>
+</section>
+
+
+
 <!-- Icons Grid-->
 <section class="features-icons bg-light text-center">
     <div class="container">
         <div class="row">
             <div class="col-lg-4">
                 <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                    <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
-                    <h3>Fully Responsive</h3>
-                    <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
+
+                    <div class="features-icons-icon d-flex">
+<!--                        <i class="fa-solid fa-chess-board"></i>-->
+                        <svg class="chess-icon m-auto text-primary" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M232 152A72 72 0 1 0 88 152a72 72 0 1 0 144 0zm24 120H243.4l10.7 80H205.7L195 272H160 125l-10.7 80H65.9l10.7-80H64c-13.3 0-24-10.7-24-24s10.7-24 24-24c-15.1-20.1-24-45-24-72C40 85.7 93.7 32 160 32s120 53.7 120 120c0 27-8.9 51.9-24 72c13.3 0 24 10.7 24 24s-10.7 24-24 24zM52.7 464H267.3l-16.6-32H69.2L52.7 464zm207.9-80c12 0 22.9 6.7 28.4 17.3l26.5 51.2c3 5.8 4.6 12.2 4.6 18.7c0 22.5-18.2 40.8-40.8 40.8H40.8C18.2 512 0 493.8 0 471.2c0-6.5 1.6-12.9 4.6-18.7l26.5-51.2C36.5 390.7 47.5 384 59.5 384h201z"/></svg>
+<!--                        <i class="bi-window m-auto text-primary"></i>-->
+                    </div>
+                    <h3>Masterful Matchmaking</h3>
+                    <p class="lead mb-0">No more mismatched opponents! Our intelligent algorithm analyzes your skill
+                        level, ratings, and playing style to find the perfect chess partner.
+                        Prepare to be challenged, learn, and grow with every move.</p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                    <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
-                    <h3>Bootstrap 5 Ready</h3>
-                    <p class="lead mb-0">Featuring the latest build of the new Bootstrap 5 framework!</p>
+                    <div class="features-icons-icon d-flex">
+<!--                        <i class="bi-layers m-auto text-primary"></i>-->
+                        <svg class="chess-icon m-auto text-primary" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M144 16c0-8.8-7.2-16-16-16s-16 7.2-16 16V32H96c-8.8 0-16 7.2-16 16s7.2 16 16 16h16V96H60.2C49.1 96 40 105.1 40 116.2c0 2.5 .5 4.9 1.3 7.3L73.8 208H72c-13.3 0-24 10.7-24 24s10.7 24 24 24h4L60 384H196L180 256h4c13.3 0 24-10.7 24-24s-10.7-24-24-24h-1.8l32.5-84.5c.9-2.3 1.3-4.8 1.3-7.3c0-11.2-9.1-20.2-20.2-20.2H144V64h16c8.8 0 16-7.2 16-16s-7.2-16-16-16H144V16zM48 416L4.8 473.6C1.7 477.8 0 482.8 0 488c0 13.3 10.7 24 24 24H232c13.3 0 24-10.7 24-24c0-5.2-1.7-10.2-4.8-14.4L208 416H48zm288 0l-43.2 57.6c-3.1 4.2-4.8 9.2-4.8 14.4c0 13.3 10.7 24 24 24H488c13.3 0 24-10.7 24-24c0-5.2-1.7-10.2-4.8-14.4L464 416H336zM304 208v51.9c0 7.8 2.8 15.3 8 21.1L339.2 312 337 384H462.5l-3.3-72 28.3-30.8c5.4-5.9 8.5-13.6 8.5-21.7V208c0-8.8-7.2-16-16-16H464c-8.8 0-16 7.2-16 16v16H424V208c0-8.8-7.2-16-16-16H392c-8.8 0-16 7.2-16 16v16H352V208c0-8.8-7.2-16-16-16H320c-8.8 0-16 7.2-16 16zm80 96c0-8.8 7.2-16 16-16s16 7.2 16 16v32H384V304z"/></svg>
+                    </div>
+                    <h3>Checkmate Toxicity</h3>
+                    <p class="lead mb-0">Bid farewell to those who ruin the game with unsportsmanlike conduct.
+                        EloMatch fosters a friendly and respectful environment where the focus is on the game,
+                        not the drama.</p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                    <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
-                    <h3>Easy to Use</h3>
-                    <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
+                    <div class="features-icons-icon d-flex">
+<!--                        <i class="bi-terminal m-auto text-primary"></i>-->
+                        <svg class="chess-icon m-auto text-primary" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M96 48L82.7 61.3C70.7 73.3 64 89.5 64 106.5V238.9c0 10.7 5.3 20.7 14.2 26.6l10.6 7c14.3 9.6 32.7 10.7 48.1 3l3.2-1.6c2.6-1.3 5-2.8 7.3-4.5l49.4-37c6.6-5 15.7-5 22.3 0c10.2 7.7 9.9 23.1-.7 30.3L90.4 350C73.9 361.3 64 380 64 400H384l28.9-159c2.1-11.3 3.1-22.8 3.1-34.3V192C416 86 330 0 224 0H83.8C72.9 0 64 8.9 64 19.8c0 7.5 4.2 14.3 10.9 17.7L96 48zm24 68a20 20 0 1 1 40 0 20 20 0 1 1 -40 0zM22.6 473.4c-4.2 4.2-6.6 10-6.6 16C16 501.9 26.1 512 38.6 512H409.4c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16L384 432H64L22.6 473.4z"/></svg>
+                    </div>
+                    <h3>Seamlessly Simple</h3>
+                    <p class="lead mb-0">Our user-friendly interface ensures a smooth experience from the first move
+                        to the last. Whether you're a beginner or a grandmaster, EloMatch makes finding opponents
+                        as easy as capturing a pawn.</p>
                 </div>
             </div>
         </div>
@@ -104,29 +149,36 @@
     <div class="container-fluid p-0">
         <div class="row g-0">
             <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image">
-                <img src="../static/img/bg-showcase-1.jpg" width="1000" th:src="@{img/bg-showcase-1.jpg}"/>
+                <img src="../static/img/chess.jpg" width="720" th:src="@{img/chess.jpg}" alt="chess-board"/>
             </div>
             <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                <h2>Fully Responsive Design</h2>
-                <p class="lead mb-0">When you use a theme created by Start Bootstrap, you know that the theme will look great on any device, whether it's a phone, tablet, or desktop the page will behave responsively!</p>
+                <h2>Why EloMatch?</h2>
+                <p class="lead mb-0">Are you tired of playing chess with opponents who don't match your skill level?
+                    Say goodbye to toxic players and hello to the perfect match! Introducing EloMatch, the ultimate
+                    chess match making app that pairs you with players of the same elo, guaranteeing fair and enjoyable
+                    battles on the board.</p>
             </div>
         </div>
         <div class="row g-0">
             <div class="col-lg-6 text-white showcase-img" style="background-image">
-                <img src="../static/img/bg-showcase-2.jpg" width="800" th:src="@{img/bg-showcase-2.jpg}"/>
+                <img src="../static/img/play-chess.jpg" width="717" th:src="@{img/play-chess.jpg}"/>
             </div>
             <div class="col-lg-6 my-auto showcase-text">
-                <h2>Updated For Bootstrap 5</h2>
-                <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 5 is leading the way in mobile responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 5!</p>
+                <h2>Your Moves, Your Pace</h2>
+                <p class="lead mb-0">Play at your convenience! EloMatch offers both real-time and turn-based
+                    gameplay options, allowing you to immerse yourself in thrilling battles or take your time with
+                    strategic moves.</p>
             </div>
         </div>
         <div class="row g-0">
             <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image">
-                <img src="../static/img/bg-showcase-3.jpg" width="1000" th:src="@{img/bg-showcase-3.jpg}"/>
+                <img src="../static/img/ultimate-match-making.jpg" width="717" th:src="@{img/ultimate-match-making.jpg}"/>
             </div>
             <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                <h2>Easy to Use & Customize</h2>
-                <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand some deeper customization options. Out of the box, just add your content and images, and your new landing page will be ready to go!</p>
+                <h2>Community of Chess Champions</h2>
+                <p class="lead mb-0">Join a vibrant community of chess enthusiasts who share your passion for the game.
+                    Participate in tournaments, discuss strategies, and make lifelong connections with fellow chess
+                    aficionados.</p>
             </div>
         </div>
     </div>
@@ -134,34 +186,40 @@
 <!-- Testimonials-->
 <section class="testimonials text-center bg-light">
     <div class="container">
-        <h2 class="mb-5">What people are saying...</h2>
+        <h2 class="mb-5">What EloMatch Players are saying...</h2>
         <div class="row">
             <div class="col-lg-4">
                 <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                    <img class="img-fluid rounded-circle mb-3" src="../static/img/testimonials-1.jpg" alt="..." />
-                    <h5>Margaret E.</h5>
-                    <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
+                    <img class="img-fluid rounded-circle mb-3" src="../static/img/testimonials-1.jpg" th:src="@{img/testimonials-1.jpg}" alt="Margaret" />
+                    <h5>Margaret E, Beginner</h5>
+                    <p class="font-weight-light mb-0">"EloMatch helped me find opponents at my level, making it
+                        easier for me to learn and improve!" - Margaret E, Beginner Player </p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                    <img class="img-fluid rounded-circle mb-3" src="../static/img/testimonials-2.jpg" alt="..." />
-                    <h5>Fred S.</h5>
-                    <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of super nice landing pages."</p>
+                    <img class="img-fluid rounded-circle mb-3" src="../static/img/testimonials-2.jpg" th:src="@{img/testimonials-2.jpg}" alt="Fred" />
+                    <h5>Fred S, Advanced</h5>
+                    <p class="font-weight-light mb-0">"EloMatch has gathered a community of strong players.
+                        The competition is fierce, and I've found worthy adversaries to test my skills."
+                        - Fred S, Advanced Player</p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                    <img class="img-fluid rounded-circle mb-3" src="../static/img/testimonials-3.jpg" alt="..." />
-                    <h5>Sarah W.</h5>
-                    <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to us!"</p>
+                    <img class="img-fluid rounded-circle mb-3" src="../static/img/testimonials-2.jpg" th:src="@{img/testimonials-3.jpg}" alt="Sarah" />
+                    <h5>Sarah W, Grandmaster</h5>
+                    <p class="font-weight-light mb-0">"EloMatch brings together grandmasters from around the world.
+                        It's a platform where we can engage in epic battles and share our expertise."
+                        - Sarah W, Grandmaster</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 <!-- Call to Action-->
-<section class="call-to-action text-white text-center" id="signup">
+<section class="check-mate-footer-level">
+<div class="call-to-action  text-white text-center" id="signup">
     <div class="container position-relative">
         <div class="row justify-content-center">
             <div class="col-xl-6">
@@ -204,12 +262,20 @@
             </div>
         </div>
     </div>
+</div>
 </section>
 <!-- Footer-->
 <footer class="footer bg-light">
     <div class="container">
+
+        <div class="logo-container">
+            <img class="footer-logo" src="../static/img/EloMatch.png" width="200" th:src="@{img/EloMatch.png}" alt="elo-match-logo"/>
+        </div>
+
         <div class="row">
+
             <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+
                 <ul class="list-inline mb-2">
                     <li class="list-inline-item"><a href="#!">About</a></li>
                     <li class="list-inline-item">⋅</li>
@@ -219,8 +285,13 @@
                     <li class="list-inline-item">⋅</li>
                     <li class="list-inline-item"><a href="#!">Privacy Policy</a></li>
                 </ul>
-                <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2023. All Rights Reserved.</p>
+                <p class="text-muted small mb-4 mb-lg-0">Created and Developed by Peter & Rodrigo</p>
+                <p class="text-muted small mb-4 mb-lg-0">&copy; EloMatch 2023. All Rights Reserved.</p>
+
             </div>
+
+
+
             <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item me-4">
@@ -239,6 +310,8 @@
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Font Awesome Kit-->
+<script src="https://kit.fontawesome.com/95201812b6.js" crossorigin="anonymous"></script>
 <!-- Core theme JS-->
 <script src="scripts.js"></script>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
