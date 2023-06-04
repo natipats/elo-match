@@ -25,7 +25,6 @@ TBD
 
 ## ♝ Code Requirements
 * [x] Set up packages for methods.
-
 * [ ] The controller of the program needs to be able to insert into database,
 * [ ] Method to delete entries by id
 * [ ] Method to update them by id
@@ -33,11 +32,11 @@ TBD
 * [ ] Method to read by id.
 * [x] Code must use MVC, object orientation
 * [ ] Code must have appropriate unit testing - test all CRUD operations.
-* [ ] Wireframe
+* [x] Wireframe
 * [ ] Add a try-catch
 * [ ] Custom error messages, error handlers in appropriate packages
 * [x] We use spring tools and @annotations
-* [ ] Make entity relation diagram
+* [x] Make entity relation diagram
 * [x] schema.sql is submitted
 * [x] Boostrap as GUI
 * [x] version control set-up and functional
