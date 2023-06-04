@@ -6,6 +6,7 @@ public class ELOMaximumException extends Exception{
         super(message);
     }
     public ELOMaximumException(String message, Throwable cause) {
+
         super(message, cause);
     }
 }
