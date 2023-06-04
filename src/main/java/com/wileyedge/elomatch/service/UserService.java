@@ -42,11 +42,14 @@ public class UserService {
 
 
     public BigDecimal checkEloByLength(BigDecimal elo) throws ELOMaximumException {
+        // Check if the ELO value is greater than 3000
        if(elo.compareTo(new BigDecimal("2000")) > 3000){
+           // Throw an ELOMaximumException with an error message
            throw new ELOMaximumException(
                    "ERROR: NO NO NO elo is not more than 3000"
            );
        }
+        // If the ELO value is within the valid range, return the ELO value.
        return elo;
     }
 
