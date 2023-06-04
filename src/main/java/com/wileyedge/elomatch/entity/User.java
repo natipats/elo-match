@@ -64,7 +64,7 @@ public class User {
     public User(String playerName, String userName, Long elo, Boolean isToxic) {
         this.playerName = playerName;
         this.userName = userName;
-        this.elo = elo;
+        this.elo = (long) Math.toIntExact(elo);
         this.isToxic = isToxic;
 
     }
