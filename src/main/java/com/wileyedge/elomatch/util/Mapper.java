@@ -1,7 +1,7 @@
 package com.wileyedge.elomatch.util;
 
 import com.wileyedge.elomatch.entity.User;
-import com.wileyedge.elomatch.model.CreateOrModifyUserModel;
+import com.wileyedge.elomatch.model.ModifyUserModel;
 import com.wileyedge.elomatch.model.UserModel;
 import org.modelmapper.ModelMapper;
 
@@ -28,7 +28,7 @@ public class Mapper {
 
     // Map a CreateOrModifyUserModel object to a User entity.
     // Create a new User object.
-    public static User mapUserEntityToModel(CreateOrModifyUserModel model){
+    public static User mapModifyUserModelToEntity(ModifyUserModel model){
         return modelMapper.map(model, User.class);
     }
 
