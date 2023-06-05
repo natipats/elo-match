@@ -1,6 +1,7 @@
 package com.wileyedge.elomatch.view;
 
 import com.wileyedge.elomatch.entity.User;
+import com.wileyedge.elomatch.persistence.UserRepository;
 import com.wileyedge.elomatch.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -18,6 +20,7 @@ public class UserViewController {
     // This is ThymeLeaf - HTML
     @Autowired
     private final UserService userService;
+    private final UserRepository userRepository;
 
     /*
         data is transferred to the users HTML attribute on the users
@@ -59,6 +62,15 @@ public class UserViewController {
 
         userService.saveUser(user);
         return "redirect:/users";
+    }
+
+    @GetMapping("delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id, Model model) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid User ID:" + id));
+        userRepository.delete(user);
+        model.addAttribute("users", userRepository.findAll());
+        return "/users";
     }
 
 }
