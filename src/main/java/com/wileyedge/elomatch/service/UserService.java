@@ -1,14 +1,10 @@
 package com.wileyedge.elomatch.service;
 
 import com.wileyedge.elomatch.entity.User;
-
-import com.wileyedge.elomatch.model.CreateUserModel;
-import com.wileyedge.elomatch.model.ModifyUserModel;
-
 import com.wileyedge.elomatch.exception.ELOMaximumException;
 import com.wileyedge.elomatch.exception.PlayerNameException;
 import com.wileyedge.elomatch.exception.ToxicDataTypeException;
-
+import com.wileyedge.elomatch.model.ModifyUserModel;
 import com.wileyedge.elomatch.model.UserModel;
 import com.wileyedge.elomatch.persistence.UserRepository;
 import com.wileyedge.elomatch.util.Mapper;
@@ -18,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -49,7 +44,7 @@ public class UserService {
 
     public BigDecimal checkEloByLength(BigDecimal elo) throws ELOMaximumException {
         // Check if the ELO value is greater than 3000
-       if(elo.compareTo(new BigDecimal("2000")) > 3000){
+       if(elo.compareTo(new BigDecimal("3000")) > 0){
            // Throw an ELOMaximumException with an error message
            throw new ELOMaximumException(
                    "ERROR: NO NO NO elo is not more than 3000"
@@ -69,18 +64,6 @@ public class UserService {
 
         // If the playerName is a valid string, return the unmodified value.
         return playerName;
-    }
-
-
-    public UserModel addNewUser(CreateUserModel model){
-        // you need to from create new model, make an entity
-        // before to make returning model save the entity
-        // then to return user model you need to make from entity a model
-        User currentUser = new User();
-        currentUser.setUserName(model.getUserName());
-        currentUser.setPlayerName(model.getPlayerName());
-
-        return Mapper.mapUserEntityToModel(userRepository.save(currentUser));
     }
 
     //this one below may not be needed we can just call the one
@@ -122,7 +105,6 @@ public class UserService {
     }
 
 
-
     public User findUserByName(String userName){
         return userRepository.findByUserName(userName);
     }
@@ -134,22 +116,26 @@ public class UserService {
     }
 
     public UserModel updateUser(Long id, ModifyUserModel modifyUserModel) {
-        // existing user id which comes from the database from particular id search
-        // and then that will be the existing whole user. with all fields, and original.
         User existingUser = userRepository.findById(id).orElse(null);
-        // .1 found
-        // .2 set modification fields inside
-        Objects.requireNonNull(existingUser).setUserName(modifyUserModel.getUserName());
-        existingUser.setPlayerName(modifyUserModel.getPlayerName());
-        existingUser.setElo((long) Math.toIntExact(modifyUserModel.getElo()));
-        existingUser.setIsToxic(modifyUserModel.getIsToxic());
-//        existingUser.setUserName(user.getUserName());
-//        existingUser.setPlayerName(user.getPlayerName());
-//        existingUser.setElo(user.getElo());
-        // existingUser. need to figure out isToxic, not appearing as get method.
+        if (existingUser == null) {
+            // Handle the case when the user with the given id is not found
+            return null; // Or throw an exception, or handle it as per your requirement
+        }
+
+        try {
+            existingUser.setUserName(modifyUserModel.getUserName());
+            existingUser.setPlayerName(checkPlayerName(modifyUserModel.getPlayerName()));
+            existingUser.setElo((long) Math.toIntExact(modifyUserModel.getElo()));
+            existingUser.setIsToxic(checkIsToxic(modifyUserModel.getIsToxic()));
+        } catch (PlayerNameException | /*ELOMaximumException | we cant get this to work*/ ToxicDataTypeException ex) {
+            // Handle the specific exceptions and take appropriate actions
+            // You can log the exception, throw a different exception, or handle it as per your requirement
+            ex.printStackTrace();
+            return null; // Or throw an exception, or handle it as per your requirement
+        }
+
         return Mapper.mapUserEntityToModel(userRepository.save(existingUser));
     }
-
 
 //    public UserModel updateUser(UserModel user) {
 //        UserModel existingUser = userRepository.findById(user.getUser_id()).orElse(null);
