@@ -122,9 +122,14 @@ public class UserService {
     }
    // try to keep delete as void or if you want to keep back anything then keep as boolean
 
-    public String deleteUser(Long id){
-       userRepository.deleteById(id);
-       return "User removed " + id;
+    public void deleteUser(Long id) {
+        User currentUser;
+        try {
+            currentUser = userRepository.findUsersById(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        userRepository.delete(currentUser);
     }
 
     public UserModel updateUser(Long id, ModifyUserModel modifyUserModel) {
