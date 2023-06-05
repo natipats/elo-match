@@ -28,13 +28,12 @@ TBD
 * [ ] The controller of the program needs to be able to insert into database,
 * [ ] Method to delete entries by id
 * [ ] Method to update them by id
-* [ ] Method to read all
-* [ ] Method to read by id.
+* [x] Method to read all
 * [x] Code must use MVC, object orientation
 * [ ] Code must have appropriate unit testing - test all CRUD operations.
 * [x] Wireframe
-* [ ] Add a try-catch
-* [ ] Custom error messages, error handlers in appropriate packages
+* [x] Add a try-catch
+* [x] Custom error messages, error handlers in appropriate packages
 * [x] We use spring tools and @annotations
 * [x] Make entity relation diagram
 * [x] schema.sql is submitted

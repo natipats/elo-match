@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>SignUp</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">Back to EloMatch Home</a>
+        <button th:href="@{/}" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/}">add your user info</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br /><br /><br />
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Become a part of the Match Making System</h2>
+            </div>
+            <div th:if="${param.success}">
+                <div class="alert alert-info">
+                    You have successfully become one of the EloMatch community players!
+                </div>
+            </div>
+            <div class="card-body">
+                <form
+                        method="post"
+                        role="form"
+                        th:action="@{/signup/save}"
+                        th:object="${user}"
+                >
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Player Name</label>
+                        <label for="playerName">Player Name</label><input
+                                class="form-control"
+                                id="playerName"
+                                name="playerName"
+                                placeholder="Enter player name"
+                                th:field="*{playerName}"
+                                type="text"
+                        />
+                        <p th:errors = "*{playerName}" class="text-danger"
+                           th:if="${#fields.hasErrors('playerName')}"></p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">User Name</label>
+                        <label for="userName">User Name</label><input
+                                class="form-control"
+                                id="userName"
+                                name="userName"
+                                placeholder="Enter user name"
+                                th:field="*{userName}"
+                                type="text"
+                        />
+                        <p th:errors = "*{userName}" class="text-danger"
+                           th:if="${#fields.hasErrors('userName')}"></p>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">sign A Friend</button>
+                        <span>If you need to sign up a friend? <a th:href="@{/}">Make a friend a Player</a></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
