@@ -4,6 +4,7 @@ import com.wileyedge.elomatch.entity.User;
 import com.wileyedge.elomatch.exception.ELOMaximumException;
 import com.wileyedge.elomatch.exception.PlayerNameException;
 import com.wileyedge.elomatch.exception.ToxicDataTypeException;
+import com.wileyedge.elomatch.model.CreateUserModel;
 import com.wileyedge.elomatch.model.ModifyUserModel;
 import com.wileyedge.elomatch.model.UserModel;
 import com.wileyedge.elomatch.persistence.UserRepository;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -65,6 +65,17 @@ public class UserService {
 
         // If the playerName is a valid string, return the unmodified value.
         return playerName;
+    }
+
+    public UserModel addNewUser(CreateUserModel model){
+        // you need to from create new model, make an entity
+        // before to make returning model save the entity
+        // then to return user model you need to make from entity a model
+        User currentUser = new User();
+        currentUser.setUserName(model.getUserName());
+        currentUser.setPlayerName(model.getPlayerName());
+
+        return Mapper.mapUserEntityToModel(userRepository.save(currentUser));
     }
 
     //this one below may not be needed we can just call the one
