@@ -69,11 +69,4 @@ public class UserViewController {
         model.addAttribute("users", userRepository.findAll());
         return "redirect:/users";
     }
-
-//    @GetMapping("/delete/{id}")
-//    public String deleteUser(@PathVariable Long id) {
-//        userService.deleteUser(id);
-//        return "redirect:/index";
-//    }
-
 }
