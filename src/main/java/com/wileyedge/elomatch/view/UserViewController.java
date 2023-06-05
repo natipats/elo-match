@@ -5,7 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,14 +26,12 @@ public class UserViewController {
         return "users";
     }
 
-    // We are keeping these parts of code for another method later.
+    @PostMapping("/users")
+    public String addNewUser(){
 
-    //        List<UserModel> users = userService.findUsers()
-//                .stream()
-//                .map(Mapper::mapUserEntityToModel)
-//                .collect(Collectors.toList());
 
-//        UserModel userByName = Mapper.mapUserEntityToModel(userService.findUserByName(userName));
-//        model.addAttribute("userAndExperience", userByName);
+
+        }
+    @GetMapping("/register")
 
 }
