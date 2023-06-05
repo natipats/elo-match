@@ -1,8 +1,15 @@
 package com.wileyedge.elomatch.service;
 
 import com.wileyedge.elomatch.entity.User;
+
 import com.wileyedge.elomatch.model.CreateUserModel;
 import com.wileyedge.elomatch.model.ModifyUserModel;
+
+import com.wileyedge.elomatch.exception.ELOMaximumException;
+import com.wileyedge.elomatch.exception.PlayerNameException;
+import com.wileyedge.elomatch.exception.ToxicDataTypeException;
+import com.wileyedge.elomatch.model.CreateOrModifyUserModel;
+
 import com.wileyedge.elomatch.model.UserModel;
 import com.wileyedge.elomatch.persistence.UserRepository;
 import com.wileyedge.elomatch.util.Mapper;
@@ -10,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,14 +48,29 @@ public class UserService {
     }
 
 
-//    public BigDecimal checkEloByLength(BigDecimal elo) throws ELOMaximumException {
-//       if(elo.compareTo(new BigDecimal("2000")) > 3000){
-//           throw new ELOMaximumException(
-//                   "ERROR: NO NO NO elo is not more than 3000"
-//           );
-//       }
-//       return elo;
-//    }
+    public BigDecimal checkEloByLength(BigDecimal elo) throws ELOMaximumException {
+        // Check if the ELO value is greater than 3000
+       if(elo.compareTo(new BigDecimal("2000")) > 3000){
+           // Throw an ELOMaximumException with an error message
+           throw new ELOMaximumException(
+                   "ERROR: NO NO NO elo is not more than 3000"
+           );
+       }
+        // If the ELO value is within the valid range, return the ELO value.
+       return elo;
+    }
+
+    public String checkPlayerName(String playerName) throws PlayerNameException {
+
+        // Check if the playerName contains a number
+        if (containsNumber(playerName)) {
+            // Throw a PlayerNameException with an error message
+            throw new PlayerNameException("ERROR: Im a teapot. playerName cant contain a number");
+        }
+
+        // If the playerName is a valid string, return the unmodified value.
+        return playerName;
+    }
 
 
     public UserModel addNewUser(CreateUserModel model){
@@ -61,7 +84,43 @@ public class UserService {
         return Mapper.mapUserEntityToModel(userRepository.save(currentUser));
     }
 
+    //this one below may not be needed we can just call the one
+   /* public String checkUserName(String userName) throws PlayerNameException{
 
+        // Check if the userName contains a number
+        if (containsNumber(userName)) {
+            // Throw a PlayerNameException with an error message
+            throw new PlayerNameException("ERROR: Im a teapot. userName cant contain a number");
+        }
+
+        // If the userName is a valid string, return the unmodified value.
+        return userName;
+    }*/
+
+    private boolean containsNumber(String str) {
+        // Iterate over each character in the string
+        for (char c : str.toCharArray()) {
+            // Check if the character is a digit
+            if (Character.isDigit(c)) {
+                // Return true if a digit is found
+                return true;
+            }
+        }
+
+        // Return false if no digits are found
+        return false;
+    }
+
+    public boolean checkIsToxic(boolean isToxic) throws ToxicDataTypeException {
+        // Check if isToxic is a boolean
+        if (!isToxic) {
+            // Throw a ToxicDataTypeException with an error message
+            throw new ToxicDataTypeException("ERROR: isToxic must be a boolean value");
+        }
+
+        // If isToxic is a valid boolean value, return the unmodified value.
+        return isToxic;
+    }
 
 
 
