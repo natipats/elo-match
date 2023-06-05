@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Getter
@@ -50,7 +52,7 @@ public class User {
     @Column(name = "user_name", nullable = false, columnDefinition = "TEXT")
     private String userName;
     @Column(name = "elo")
-    private Long elo;
+    private BigDecimal elo;
     @Column(name = "is_toxic", columnDefinition = "BIT(1)")
     private Boolean isToxic; // We can now use a BIT column to store one or many true/false values in a single column.
     // BIT(1) defines a field that contains a single bit.
@@ -61,10 +63,10 @@ public class User {
     @JoinColumn(name = "experience_id")
     private Experience experience;
 
-    public User(String playerName, String userName, Long elo, Boolean isToxic) {
+    public User(String playerName, String userName, BigDecimal elo, Boolean isToxic) {
         this.playerName = playerName;
         this.userName = userName;
-        this.elo = (long) Math.toIntExact(elo);
+        this.elo = elo;
         this.isToxic = isToxic;
 
     }
