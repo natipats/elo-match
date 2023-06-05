@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -64,13 +61,19 @@ public class UserViewController {
         return "redirect:/users";
     }
 
-    @GetMapping("delete/{id}")
+    @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id, Model model) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User ID:" + id));
         userRepository.delete(user);
         model.addAttribute("users", userRepository.findAll());
-        return "/users";
+        return "redirect:/users";
     }
+
+//    @GetMapping("/delete/{id}")
+//    public String deleteUser(@PathVariable Long id) {
+//        userService.deleteUser(id);
+//        return "redirect:/index";
+//    }
 
 }
