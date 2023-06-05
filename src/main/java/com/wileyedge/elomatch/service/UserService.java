@@ -2,6 +2,8 @@ package com.wileyedge.elomatch.service;
 
 import com.wileyedge.elomatch.entity.User;
 import com.wileyedge.elomatch.exception.ELOMaximumException;
+import com.wileyedge.elomatch.exception.PlayerNameException;
+import com.wileyedge.elomatch.exception.ToxicDataTypeException;
 import com.wileyedge.elomatch.model.CreateOrModifyUserModel;
 import com.wileyedge.elomatch.model.UserModel;
 import com.wileyedge.elomatch.persistence.UserRepository;
@@ -53,7 +55,55 @@ public class UserService {
        return elo;
     }
 
+    public String checkPlayerName(String playerName) throws PlayerNameException {
 
+        // Check if the playerName contains a number
+        if (containsNumber(playerName)) {
+            // Throw a PlayerNameException with an error message
+            throw new PlayerNameException("ERROR: Im a teapot. playerName cant contain a number");
+        }
+
+        // If the playerName is a valid string, return the unmodified value.
+        return playerName;
+    }
+
+    //this one below may not be needed we can just call the one
+   /* public String checkUserName(String userName) throws PlayerNameException{
+
+        // Check if the userName contains a number
+        if (containsNumber(userName)) {
+            // Throw a PlayerNameException with an error message
+            throw new PlayerNameException("ERROR: Im a teapot. userName cant contain a number");
+        }
+
+        // If the userName is a valid string, return the unmodified value.
+        return userName;
+    }*/
+
+    private boolean containsNumber(String str) {
+        // Iterate over each character in the string
+        for (char c : str.toCharArray()) {
+            // Check if the character is a digit
+            if (Character.isDigit(c)) {
+                // Return true if a digit is found
+                return true;
+            }
+        }
+
+        // Return false if no digits are found
+        return false;
+    }
+
+    public boolean checkIsToxic(boolean isToxic) throws ToxicDataTypeException {
+        // Check if isToxic is a boolean
+        if (!isToxic) {
+            // Throw a ToxicDataTypeException with an error message
+            throw new ToxicDataTypeException("ERROR: isToxic must be a boolean value");
+        }
+
+        // If isToxic is a valid boolean value, return the unmodified value.
+        return isToxic;
+    }
 
 
     public User findUserByName(String userName){
