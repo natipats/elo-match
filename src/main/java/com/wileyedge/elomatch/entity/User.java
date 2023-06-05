@@ -50,9 +50,9 @@ public class User {
     @Column(name = "user_name", nullable = false, columnDefinition = "TEXT")
     private String userName;
     @Column(name = "elo")
-    private Long elo;
+    private Long elo = 0l;
     @Column(name = "is_toxic", columnDefinition = "BIT(1)")
-    private Boolean isToxic; // We can now use a BIT column to store one or many true/false values in a single column.
+    private Boolean isToxic = false; // We can now use a BIT column to store one or many true/false values in a single column.
     // BIT(1) defines a field that contains a single bit.
 
     // We have included a ManyToOne relationship with the Experience entity,
