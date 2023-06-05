@@ -8,7 +8,6 @@ import com.wileyedge.elomatch.model.ModifyUserModel;
 import com.wileyedge.elomatch.exception.ELOMaximumException;
 import com.wileyedge.elomatch.exception.PlayerNameException;
 import com.wileyedge.elomatch.exception.ToxicDataTypeException;
-import com.wileyedge.elomatch.model.CreateOrModifyUserModel;
 
 import com.wileyedge.elomatch.model.UserModel;
 import com.wileyedge.elomatch.persistence.UserRepository;
