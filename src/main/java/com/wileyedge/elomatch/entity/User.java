@@ -60,12 +60,4 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "experience_id")
     private Experience experience;
-
-    public User(String playerName, String userName, Long elo, Boolean isToxic) {
-        this.playerName = playerName;
-        this.userName = userName;
-        this.elo = (long) Math.toIntExact(elo);
-        this.isToxic = isToxic;
-
-    }
 }
