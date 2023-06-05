@@ -45,7 +45,7 @@ public class UserService {
 
     public BigDecimal checkEloByLength(BigDecimal elo) throws ELOMaximumException {
         // Check if the ELO value is greater than 3000
-       if(elo.compareTo(new BigDecimal("3000")) > 0){
+       if(elo.compareTo(new BigDecimal("2000")) > 3000){
            // Throw an ELOMaximumException with an error message
            throw new ELOMaximumException(
                    "ERROR: NO NO NO elo is not more than 3000"
@@ -117,24 +117,19 @@ public class UserService {
     }
 
     public UserModel updateUser(Long id, CreateOrModifyUserModel createOrModifyUserModel) {
+        // existing user id which comes from the database from particular id search
+        // and then that will be the existing whole user. with all fields, and original.
         User existingUser = userRepository.findById(id).orElse(null);
-        if (existingUser == null) {
-            // Handle the case when the user with the given id is not found
-            return null; // Or throw an exception, or handle it as per your requirement
-        }
-
-        try {
-            existingUser.setUserName(createOrModifyUserModel.getUserName());
-            existingUser.setPlayerName(checkPlayerName(createOrModifyUserModel.getPlayerName()));
-            existingUser.setElo(BigDecimal.valueOf(createOrModifyUserModel.getElo()));
-            existingUser.setIsToxic(checkIsToxic(createOrModifyUserModel.getIsToxic()));
-        } catch (PlayerNameException | /*ELOMaximumException | we cant get this to work*/ ToxicDataTypeException ex) {
-            // Handle the specific exceptions and take appropriate actions
-            // You can log the exception, throw a different exception, or handle it as per your requirement
-            ex.printStackTrace();
-            return null; // Or throw an exception, or handle it as per your requirement
-        }
-
+        // .1 found
+        // .2 set modification fields inside
+        Objects.requireNonNull(existingUser).setUserName(createOrModifyUserModel.getUserName());
+        existingUser.setPlayerName(createOrModifyUserModel.getPlayerName());
+        existingUser.setElo((long) Math.toIntExact(createOrModifyUserModel.getElo()));
+        existingUser.setIsToxic(createOrModifyUserModel.getIsToxic());
+//        existingUser.setUserName(user.getUserName());
+//        existingUser.setPlayerName(user.getPlayerName());
+//        existingUser.setElo(user.getElo());
+        // existingUser. need to figure out isToxic, not appearing as get method.
         return Mapper.mapUserEntityToModel(userRepository.save(existingUser));
     }
 
