@@ -1,7 +1,8 @@
 package com.wileyedge.elomatch.service;
 
 import com.wileyedge.elomatch.entity.User;
-import com.wileyedge.elomatch.model.CreateOrModifyUserModel;
+import com.wileyedge.elomatch.model.CreateUserModel;
+import com.wileyedge.elomatch.model.ModifyUserModel;
 import com.wileyedge.elomatch.model.UserModel;
 import com.wileyedge.elomatch.persistence.UserRepository;
 import com.wileyedge.elomatch.util.Mapper;
@@ -49,6 +50,19 @@ public class UserService {
 //    }
 
 
+    public UserModel addNewUser(CreateUserModel model){
+        // you need to from create new model, make an entity
+        // before to make returning model save the entity
+        // then to return user model you need to make from entity a model
+        User currentUser = new User();
+        currentUser.setUserName(model.getUserName());
+        currentUser.setPlayerName(model.getPlayerName());
+
+        return Mapper.mapUserEntityToModel(userRepository.save(currentUser));
+    }
+
+
+
 
 
     public User findUserByName(String userName){
@@ -61,16 +75,16 @@ public class UserService {
        return "User removed " + id;
     }
 
-    public UserModel updateUser(Long id, CreateOrModifyUserModel createOrModifyUserModel) {
+    public UserModel updateUser(Long id, ModifyUserModel modifyUserModel) {
         // existing user id which comes from the database from particular id search
         // and then that will be the existing whole user. with all fields, and original.
         User existingUser = userRepository.findById(id).orElse(null);
         // .1 found
         // .2 set modification fields inside
-        Objects.requireNonNull(existingUser).setUserName(createOrModifyUserModel.getUserName());
-        existingUser.setPlayerName(createOrModifyUserModel.getPlayerName());
-        existingUser.setElo((long) Math.toIntExact(createOrModifyUserModel.getElo()));
-        existingUser.setIsToxic(createOrModifyUserModel.getIsToxic());
+        Objects.requireNonNull(existingUser).setUserName(modifyUserModel.getUserName());
+        existingUser.setPlayerName(modifyUserModel.getPlayerName());
+        existingUser.setElo((long) Math.toIntExact(modifyUserModel.getElo()));
+        existingUser.setIsToxic(modifyUserModel.getIsToxic());
 //        existingUser.setUserName(user.getUserName());
 //        existingUser.setPlayerName(user.getPlayerName());
 //        existingUser.setElo(user.getElo());
