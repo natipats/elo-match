@@ -1,13 +1,12 @@
 package com.wileyedge.elomatch.view;
 
+import com.wileyedge.elomatch.entity.User;
 import com.wileyedge.elomatch.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,12 +25,12 @@ public class UserViewController {
         return "users";
     }
 
-    @PostMapping("/users")
-    public String addNewUser(){
-
-
-
-        }
-    @GetMapping("/register")
+    @GetMapping("/signup")
+    public String addNewUser(Model model){
+        // create model object to store form data
+        User user = new User();
+        model.addAttribute("user", user);
+        return "signup";
+    }
 
 }
