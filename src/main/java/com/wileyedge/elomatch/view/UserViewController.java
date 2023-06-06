@@ -122,10 +122,25 @@ public class UserViewController {
     // Identifying update page so that we can update the user details from the admin side.
     @GetMapping("admin-edit/{id}")
     public String showUpdatePage(@PathVariable("id") Long id, Model model) {
+        // Find the user with the provided ID in the userRepository.
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + id));
-        model.addAttribute("user", user);
-        return "update";
+        model.addAttribute("user", user); // Add the found user object to the model with the key "user".
+        return "update"; // Return the "update" view to display the user update page.
+    }
+
+    @PostMapping("update/{id}")
+    public String updateUser(@PathVariable("id") Long id, @Validated User currentUser, BindingResult result,
+                                Model model) {
+        // Check if there are validation errors in the user input.
+        if (result.hasErrors()) {
+            currentUser.setId(id); // Set the ID of the currentUser to the provided ID in the path variable.
+            return "update"; // Return the "update" view to display the form with validation errors.
+        }
+
+        userRepository.save(currentUser); // Save the updated user in the userRepository.
+        model.addAttribute("users", userRepository.findAll()); // Add the list of all users to the model.
+        return "redirect:/users"; // Redirect to the "/users" URL to display the updated list of users.
     }
 
 
