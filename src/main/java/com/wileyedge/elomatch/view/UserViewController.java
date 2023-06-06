@@ -3,14 +3,16 @@ package com.wileyedge.elomatch.view;
 import com.wileyedge.elomatch.entity.User;
 import com.wileyedge.elomatch.persistence.UserRepository;
 import com.wileyedge.elomatch.service.UserService;
-import jakarta.persistence.Id;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Collections;
 import java.util.List;
@@ -77,8 +79,8 @@ public class UserViewController {
             System.out.println("in matchmaker");
             User user1 = allUsers.get(index1);
             User user2 = allUsers.get(index2);
-            Long max = 0l;
-            Long min = 0l;
+            Long max = 0L;
+            Long min = 0L;
             if (user1.getElo() > user2.getElo())
             {
                 max = user1.getElo();
@@ -101,6 +103,7 @@ public class UserViewController {
             return Collections.emptyList();
         }
     }
+
     /*@GetMapping("/matchmaker/{startId}/{endId}")
     public String matchmaker(@PathVariable("startId") Integer startId,
                              @PathVariable("endId") Integer endId,
@@ -114,6 +117,15 @@ public class UserViewController {
 
         model.addAttribute("users", matchedUsers);
         return "matchmaker";
+    }
+
+    // Identifying update page so that we can update the user details from the admin side.
+    @GetMapping("adminEdit/{id}")
+    public String showUpdatePage(@PathVariable("id") Long id, Model model) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + id));
+        model.addAttribute("user", user);
+        return "update-student";
     }
 
     @GetMapping("/users/delete/{id}")
