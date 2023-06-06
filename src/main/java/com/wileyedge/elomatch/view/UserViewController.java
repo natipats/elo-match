@@ -147,10 +147,11 @@ public class UserViewController {
 
     @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id, Model model) {
+        // Find the user with the provided ID in the userRepository.
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User ID:" + id));
-        userRepository.delete(user);
-        model.addAttribute("users", userRepository.findAll());
-        return "redirect:/users";
+        userRepository.delete(user); // Delete the user from the userRepository.
+        model.addAttribute("users", userRepository.findAll()); // Add the list of all users to the model.
+        return "redirect:/users"; // Redirect to the "/users" URL to display the updated list of users.
     }
 }
