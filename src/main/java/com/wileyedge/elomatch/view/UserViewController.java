@@ -125,7 +125,7 @@ public class UserViewController {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + id));
         model.addAttribute("user", user);
-        return "update-student";
+        return "update";
     }
 
     @GetMapping("/users/delete/{id}")
