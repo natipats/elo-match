@@ -129,7 +129,7 @@ public class UserViewController {
         return "update"; // Return the "update" view to display the user update page.
     }
 
-    @PostMapping("update/{id}")
+    @PostMapping("/users/update/{id}")
     public String updateUser(@PathVariable("id") Long id, @Validated User currentUser, BindingResult result,
                                 Model model) {
         // Check if there are validation errors in the user input.
@@ -144,7 +144,7 @@ public class UserViewController {
     }
 
 
-
+    // delete a user
     @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id, Model model) {
         // Find the user with the provided ID in the userRepository.
