@@ -25,8 +25,8 @@ TBD
 
 ## ♝ Code Requirements
 * [x] Set up packages for methods.
-* [ ] The controller of the program needs to be able to insert into database,
-* [ ] Method to delete entries by id
+* [x] The controller of the program needs to be able to insert into database,
+* [x] Method to delete entries by id
 * [ ] Method to update them by id
 * [x] Method to read all
 * [x] Code must use MVC, object orientation
