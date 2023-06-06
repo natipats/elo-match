@@ -22,15 +22,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByUserName(String userName);
 
     User findUsersById(Long id);
-
-    //    RankModel getRanking = new RankModel();
-//    RankModel beginner = new RankModel();
-
-//    @Override
-//    UserModel getReferenceById(Integer integer);
-//     beginner.setRankingId(1);
-//     beginner.setExp("Beginner");
-//
-//     getRanking.save();
-
 }
