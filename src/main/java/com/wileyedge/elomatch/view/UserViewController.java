@@ -64,7 +64,7 @@ public class UserViewController {
             return "/signup";
         }
 
-        userService.saveUser(user);
+        User saveUser = userService.saveUser(user);
         return "redirect:/users";
     }
 
@@ -126,16 +126,16 @@ public class UserViewController {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + id));
         model.addAttribute("user", user); // Add the found user object to the model with the key "user".
-        return "update"; // Return the "update" view to display the user update page.
+        return "update-user"; // Return the "update" view to display the user update page.
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/update-user/{id}")
     public String updateUser(@PathVariable("id") Long id, @Validated User currentUser, BindingResult result,
                                 Model model) {
         // Check if there are validation errors in the user input.
         if (result.hasErrors()) {
             currentUser.setId(id); // Set the ID of the currentUser to the provided ID in the path variable.
-            return "update"; // Return the "update" view to display the form with validation errors.
+            return "redirect:/users"; // Return the "update" view to display the form with validation errors.
         }
 
         userRepository.save(currentUser); // Save the updated user in the userRepository.
