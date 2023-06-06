@@ -6,6 +6,8 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+        integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
 
 </head>
@@ -19,17 +21,19 @@
     <th> Player Name </th>
     <th> Elo </th>
     <th> Player Toxic or Not ??? </th>
+    <th>Delete</th>
   </tr>
   </thead>
   <tbody>
   <tr th:if="${users.empty}">
-    <td colspan="4"> No Users Available at this time!!! </td>
+    <td colspan="5"> No Users Available at this time!!! </td>
   </tr>
   <tr th:each="user : ${users}">
     <td><span th:text="${user.getUserName()}"> User Name </span></td>
     <td><span th:text="${user.getPlayerName()}"> player Name </span></td>
     <td><span th:text="${user.getElo()}"> Elo </span></td>
     <td><span th:text="${user.getIsToxic()}"> Toxic level </span></td>
+    <td><a th:href="@{/users/delete/{id}(id=${user.getId()})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
   </tr>
   </tbody>
 </table>

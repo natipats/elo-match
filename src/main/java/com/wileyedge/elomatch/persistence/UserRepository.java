@@ -21,16 +21,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // this will allow you to create an option incase userName does not appear.
     User findByUserName(String userName);
 
-
-
-    //    RankModel getRanking = new RankModel();
-//    RankModel beginner = new RankModel();
-
-//    @Override
-//    UserModel getReferenceById(Integer integer);
-//     beginner.setRankingId(1);
-//     beginner.setExp("Beginner");
-//
-//     getRanking.save();
-
+    User findUsersById(Long id);
 }

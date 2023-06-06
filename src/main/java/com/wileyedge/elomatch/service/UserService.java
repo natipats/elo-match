@@ -122,9 +122,14 @@ public class UserService {
     }
    // try to keep delete as void or if you want to keep back anything then keep as boolean
 
-    public String deleteUser(Long id){
-       userRepository.deleteById(id);
-       return "User removed " + id;
+    public void deleteUser(Long id) {
+        User currentUser;
+        try {
+            currentUser = userRepository.findUsersById(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        userRepository.delete(currentUser);
     }
 
     public UserModel updateUser(Long id, ModifyUserModel modifyUserModel) {
@@ -148,17 +153,4 @@ public class UserService {
 
         return Mapper.mapUserEntityToModel(userRepository.save(existingUser));
     }
-
-//    public UserModel updateUser(UserModel user) {
-//        UserModel existingUser = userRepository.findById(user.getUser_id()).orElse(null);
-//        existingUser.setUserName(user.getUserName());
-//        existingUser.setPlayerName(user.getPlayerName());
-//        existingUser.setElo(user.getElo());
-//        existingUser.setToxic(user.isToxic());
-//        // existingUser. need to figure out isToxic, not appearing as get method.
-//        return userRepository.save(existingUser);
-//    }
-
-
-
 }
