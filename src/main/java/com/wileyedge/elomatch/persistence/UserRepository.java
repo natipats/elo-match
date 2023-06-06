@@ -4,6 +4,8 @@ import com.wileyedge.elomatch.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 // The @Repository annotation indicates that this interface is a repository,
 // allowing it to be automatically detected and used by the framework.
@@ -20,6 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // next time that optional would be better solution next time.
     // this will allow you to create an option incase userName does not appear.
     User findByUserName(String userName);
+    List<User> findByIdBetweenOrderByEloAsc(Integer startId, Integer endId);
 
     User findUsersById(Long id);
 }
