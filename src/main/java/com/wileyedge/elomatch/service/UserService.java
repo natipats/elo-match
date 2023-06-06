@@ -153,17 +153,4 @@ public class UserService {
 
         return Mapper.mapUserEntityToModel(userRepository.save(existingUser));
     }
-
-//    public UserModel updateUser(UserModel user) {
-//        UserModel existingUser = userRepository.findById(user.getUser_id()).orElse(null);
-//        existingUser.setUserName(user.getUserName());
-//        existingUser.setPlayerName(user.getPlayerName());
-//        existingUser.setElo(user.getElo());
-//        existingUser.setToxic(user.isToxic());
-//        // existingUser. need to figure out isToxic, not appearing as get method.
-//        return userRepository.save(existingUser);
-//    }
-
-
-
 }
