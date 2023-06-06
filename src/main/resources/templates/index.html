@@ -24,7 +24,7 @@
         <a class="navbar-brand"  href="#!">
             <img src="../static/img/EloMatch.png" width="200" th:src="@{img/EloMatch.png}" alt="elo-match-logo"/>
         </a>
-        <a href="/signup" class="btn btn-primary">Sign Up</a>
+        <a href="/signup" class="btn btn-primary">Add User</a>
     </div>
 </nav>
 <!-- Masthead-->
@@ -90,6 +90,9 @@
     <div class="row m-4 border border-dark">
         <div class="col text-center m-3">
             <a href="/users" class="btn btn-outline-primary btn-lg">Users Info</a>
+        </div>
+        <div class="col text-center m-3">
+            <a href="/admin-edit" class="btn btn-outline-primary btn-lg">admin edit User</a>
         </div>
         <div class="col text-center m-3">
             <a href="/matchmaker" class="btn btn-outline-primary btn-lg" action="matchmaker()">Fight a guy</a>
