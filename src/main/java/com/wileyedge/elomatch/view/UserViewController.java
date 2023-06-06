@@ -120,13 +120,15 @@ public class UserViewController {
     }
 
     // Identifying update page so that we can update the user details from the admin side.
-    @GetMapping("adminEdit/{id}")
+    @GetMapping("admin-edit/{id}")
     public String showUpdatePage(@PathVariable("id") Long id, Model model) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + id));
         model.addAttribute("user", user);
         return "update";
     }
+
+
 
     @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id, Model model) {
