@@ -120,7 +120,7 @@ public class UserViewController {
     }
 
     // Identifying update page so that we can update the user details from the admin side.
-    @GetMapping("admin-edit/{id}")
+    @GetMapping("/users/admin-edit/{id}")
     public String showUpdatePage(@PathVariable("id") Long id, Model model) {
         // Find the user with the provided ID in the userRepository.
         User user = userRepository.findById(id)
@@ -129,7 +129,7 @@ public class UserViewController {
         return "update"; // Return the "update" view to display the user update page.
     }
 
-    @PostMapping("/users/update/{id}")
+    @PostMapping("/update/{id}")
     public String updateUser(@PathVariable("id") Long id, @Validated User currentUser, BindingResult result,
                                 Model model) {
         // Check if there are validation errors in the user input.
