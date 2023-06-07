@@ -1,7 +1,6 @@
 package com.wileyedge.elomatch.view;
 
 import com.wileyedge.elomatch.entity.User;
-import com.wileyedge.elomatch.persistence.UserRepository;
 import com.wileyedge.elomatch.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -24,7 +23,6 @@ public class UserViewController {
     // This is ThymeLeaf - HTML
     @Autowired
     private final UserService userService;
-    private final UserRepository userRepository;
 
     /*
         data is transferred to the users HTML attribute on the users
@@ -68,54 +66,12 @@ public class UserViewController {
         return "redirect:/users";
     }
 
-    public List<User> matchmakingAlgorithm() {
-        List<User> allUsers = userRepository.findAll(); // Fetch all users from the database
-        int totalUsers = allUsers.size();
-
-        if (totalUsers >= 2) {
-            Random random = new Random();
-            int index1 = random.nextInt(totalUsers); // Generate a random index for the first user
-            int index2 = random.nextInt(totalUsers); // Generate a random index for the second user
-            System.out.println("in matchmaker");
-            User user1 = allUsers.get(index1);
-            User user2 = allUsers.get(index2);
-            Long max = 0L;
-            Long min = 0L;
-            if (user1.getElo() > user2.getElo())
-            {
-                max = user1.getElo();
-                min = user2.getElo();
-            } else if (user2.getElo() > user1.getElo() )
-            {
-                max = user2.getElo();
-                min = user1.getElo();
-            }
-            // Ensure that the two users have different IDs
-            while (user1.getId().equals(user2.getId()) || (max - min > 100)){
-                index2 = random.nextInt(totalUsers);
-                user2 = allUsers.get(index2);
-            }
-
-            return List.of(user1, user2);
-        } else {
-            // Handle case when there are not enough users in the database
-            System.out.println("list is empty");
-            return Collections.emptyList();
-        }
-    }
-
-    /*@GetMapping("/matchmaker/{startId}/{endId}")
-    public String matchmaker(@PathVariable("startId") Integer startId,
-                             @PathVariable("endId") Integer endId,
-                             Model model) {
-
-        return "redirect:/matchmaker";
-    }*/
     @GetMapping("/matchmaker")
     public String matchmakerPage(Model model) {
+        //List<User> matchedUsers = matchmakingAlgorithm();
         List<User> matchedUsers = matchmakingAlgorithm();
 
-        model.addAttribute("users", matchedUsers);
+        model.addAttribute("users_matchmaker", matchedUsers);
         return "matchmaker";
     }
 
@@ -123,10 +79,13 @@ public class UserViewController {
     @GetMapping("/users/edit/{id}")
     public String showUpdatePage(@PathVariable("id") Long id, Model model) {
         // Find the user with the provided ID in the userRepository.
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + id));
-        model.addAttribute("user", user); // Add the found user object to the model with the key "user".
-        return "updateUser"; // Return the "update" view to display the user update page.
+        User user = userService.findUserById(id);
+        if(user == null){
+            throw new IllegalArgumentException("Invalid user Id:" + id);
+        } else {
+            model.addAttribute("user", user); // Add the found user object to the model with the key "user".
+            return "updateUser"; // Return the "update" view to display the user update page.
+        }
     }
 
     @PostMapping("/users/update/{id}")
@@ -138,8 +97,8 @@ public class UserViewController {
             return "update"; // Return the "update" view to display the form with validation errors.
         }
 
-        userRepository.save(currentUser); // Save the updated user in the userRepository.
-        model.addAttribute("users", userRepository.findAll()); // Add the list of all users to the model.
+        userService.saveUser(currentUser); // Save the updated user in the userRepository.
+        model.addAttribute("users", userService.findUsers()); // Add the list of all users to the model.
         return "users"; // Redirect to the "/users" URL to display the updated list of users.
     }
 
@@ -148,10 +107,26 @@ public class UserViewController {
     @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id, Model model) {
         // Find the user with the provided ID in the userRepository.
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid User ID:" + id));
-        userRepository.delete(user); // Delete the user from the userRepository.
-        model.addAttribute("users", userRepository.findAll()); // Add the list of all users to the model.
-        return "redirect:/users"; // Redirect to the "/users" URL to display the updated list of users.
+        User user = userService.findUserById(id);
+        if(user == null){
+            throw new IllegalArgumentException("Invalid user Id:" + id);
+        } else {
+            userService.deleteUser(id);
+            model.addAttribute("users", userService.findUsers()); // Add the list of all users to the model.
+            return "redirect:/users"; // Redirect to the "/users" URL to display the updated list of users.
+        }
+    }
+
+    private List<User> matchmakingAlgorithm() {
+        List<User> allUsers = userService.findUsers(); // Fetch all users from the database
+        List<User> matchers = new ArrayList<>();
+        matchers.add(getRandomElement(allUsers));
+        matchers.add(getRandomElement(allUsers));
+        return matchers;
+    }
+
+    private User getRandomElement(List<User> list) {
+        Random rand = new Random();
+        return list.get(rand.nextInt(list.size()));
     }
 }

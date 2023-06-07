@@ -18,12 +18,12 @@
   </tr>
   </thead>
   <tbody>
-  <tr th:each="user : ${users}">
+  <tr th:each="user : ${users_matchmaker}">
     <td th:text="${user.id}">ID</td>
     <td th:text="${user.userName}">Name</td>
     <td th:text="${user.elo}">Elo</td>
     <td><!--p th:text="${user.startid[0] + ' ' + user.endid[1]}" th:unless="${user.getid() == null}">Test</p-->
-    </a></td>
+    </td>
 
   </tr>
   </tbody>
