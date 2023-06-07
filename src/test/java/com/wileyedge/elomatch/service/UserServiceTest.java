@@ -9,8 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class UserServiceTest {
@@ -41,5 +40,40 @@ class UserServiceTest {
         assertEquals(0L, savedUser.getElo());
         assertFalse(savedUser.getIsToxic());
     }
+
+    @Test
+    @DisplayName("Test delete an existing user")
+    public void testDeleteAnExistingUser() {
+        Long id = 1000L;
+
+        User user = new User();
+        user.setId(id);
+        when(userRepository.findUsersById(id)).thenReturn(user);
+
+        userService.deleteUser(id);
+
+        // Verify the behavior
+        verify(userRepository, times(1)).findUsersById(id);
+        verify(userRepository, times(1)).deleteById(id);
+    }
+
+    @Test
+    @DisplayName("Test delete a non-existing user")
+    public void testDeleteNonExistingUser() {
+        Long id = 1000L;
+
+        User user = new User();
+        when(userRepository.findUsersById(id)).thenReturn(null);
+
+        // Invoke and verify
+        assertThrows(IllegalArgumentException.class, () -> {
+            userService.deleteUser(id);
+        });
+
+        // Verify the behavior
+        verify(userRepository, times(1)).findUsersById(id);
+        verify(userRepository, never()).delete(any(User.class));
+    }
+
 
 }
