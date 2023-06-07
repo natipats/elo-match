@@ -4,6 +4,7 @@ import com.wileyedge.elomatch.entity.User;
 import com.wileyedge.elomatch.exception.ELOMaximumException;
 import com.wileyedge.elomatch.exception.PlayerNameException;
 import com.wileyedge.elomatch.exception.ToxicDataTypeException;
+import com.wileyedge.elomatch.model.CreateUserModel;
 import com.wileyedge.elomatch.model.ModifyUserModel;
 import com.wileyedge.elomatch.model.UserModel;
 import com.wileyedge.elomatch.persistence.UserRepository;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -67,6 +67,17 @@ public class UserService {
         return playerName;
     }
 
+    public UserModel addNewUser(CreateUserModel model){
+        // you need to from create new model, make an entity
+        // before to make returning model save the entity
+        // then to return user model you need to make from entity a model
+        User currentUser = new User();
+        currentUser.setUserName(model.getUserName());
+        currentUser.setPlayerName(model.getPlayerName());
+
+        return Mapper.mapUserEntityToModel(userRepository.save(currentUser));
+    }
+
     //this one below may not be needed we can just call the one
    /* public String checkUserName(String userName) throws PlayerNameException{
 
@@ -111,9 +122,12 @@ public class UserService {
     }
    // try to keep delete as void or if you want to keep back anything then keep as boolean
 
-    public String deleteUser(Long id){
-       userRepository.deleteById(id);
-       return "User removed " + id;
+    public void deleteUser(Long id) {
+        User currentUser = userRepository.findUsersById(id);
+        if (currentUser == null) {
+            throw new IllegalArgumentException("User not found with ID: " + id);
+        }
+        userRepository.deleteById(id);
     }
 
     public UserModel updateUser(Long id, ModifyUserModel modifyUserModel) {
@@ -137,17 +151,4 @@ public class UserService {
 
         return Mapper.mapUserEntityToModel(userRepository.save(existingUser));
     }
-
-//    public UserModel updateUser(UserModel user) {
-//        UserModel existingUser = userRepository.findById(user.getUser_id()).orElse(null);
-//        existingUser.setUserName(user.getUserName());
-//        existingUser.setPlayerName(user.getPlayerName());
-//        existingUser.setElo(user.getElo());
-//        existingUser.setToxic(user.isToxic());
-//        // existingUser. need to figure out isToxic, not appearing as get method.
-//        return userRepository.save(existingUser);
-//    }
-
-
-
 }

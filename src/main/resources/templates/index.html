@@ -24,7 +24,7 @@
         <a class="navbar-brand"  href="#!">
             <img src="../static/img/EloMatch.png" width="200" th:src="@{img/EloMatch.png}" alt="elo-match-logo"/>
         </a>
-        <a href="/signup" class="btn btn-primary">Sign Up</a>
+        <a href="/signup" class="btn btn-primary">Add User</a>
     </div>
 </nav>
 <!-- Masthead-->
@@ -49,7 +49,7 @@
                         <!-- Email address input-->
                         <div class="row">
                             <div class="col">
-                                <input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required,email" />
+                                <label for="emailAddress"></label><input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required,email" />
                                 <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Email Address is required.</div>
                                 <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
                             </div>
@@ -91,8 +91,11 @@
         <div class="col text-center m-3">
             <a href="/users" class="btn btn-outline-primary btn-lg">Users Info</a>
         </div>
+<!--        <div class="col text-center m-3">-->
+<!--            <a href="/updateUser" class="btn btn-outline-primary btn-lg">admin edit User</a>-->
+<!--        </div>-->
         <div class="col text-center m-3">
-            <a href="admins" class="btn btn-outline-primary btn-lg">Experience from Users</a>
+            <a href="/matchmaker" class="btn btn-outline-primary btn-lg" action="matchmaker()">Fight a guy</a>
         </div>
     </div>
 </section>
@@ -161,7 +164,7 @@
         </div>
         <div class="row g-0">
             <div class="col-lg-6 text-white showcase-img" style="background-image">
-                <img src="../static/img/play-chess.jpg" width="717" th:src="@{img/play-chess.jpg}"/>
+                <img src="../static/img/play-chess.jpg" width="717" th:src="@{img/play-chess.jpg}" alt="play chess"/>
             </div>
             <div class="col-lg-6 my-auto showcase-text">
                 <h2>Your Moves, Your Pace</h2>
@@ -172,7 +175,7 @@
         </div>
         <div class="row g-0">
             <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image">
-                <img src="../static/img/ultimate-match-making.jpg" width="717" th:src="@{img/ultimate-match-making.jpg}"/>
+                <img src="../static/img/ultimate-match-making.jpg" width="717" th:src="@{img/ultimate-match-making.jpg}" alt="chess player"/>
             </div>
             <div class="col-lg-6 order-lg-1 my-auto showcase-text">
                 <h2>Community of Chess Champions</h2>
