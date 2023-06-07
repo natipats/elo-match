@@ -19,18 +19,14 @@ from a database and display it on a website, as well as
 make a cute matchmaking system based around the rules 
 and functions of chess and chess websites.
 
-## User Stories
-
-TBD
-
 ## ♝ Code Requirements
 * [x] Set up packages for methods.
 * [x] The controller of the program needs to be able to insert into database,
 * [x] Method to delete entries by id
-* [ ] Method to update them by id
+* [x] Method to update them by id
 * [x] Method to read all
 * [x] Code must use MVC, object orientation
-* [ ] Code must have appropriate unit testing - test all CRUD operations.
+* [x] Code must have appropriate unit testing - test all CRUD operations.
 * [x] Wireframe
 * [x] Add a try-catch
 * [x] Custom error messages, error handlers in appropriate packages
