@@ -3,14 +3,16 @@ package com.wileyedge.elomatch.view;
 import com.wileyedge.elomatch.entity.User;
 import com.wileyedge.elomatch.persistence.UserRepository;
 import com.wileyedge.elomatch.service.UserService;
-import jakarta.persistence.Id;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Collections;
 import java.util.List;
@@ -62,7 +64,7 @@ public class UserViewController {
             return "/signup";
         }
 
-        userService.saveUser(user);
+        User saveUser = userService.saveUser(user);
         return "redirect:/users";
     }
 
@@ -77,8 +79,8 @@ public class UserViewController {
             System.out.println("in matchmaker");
             User user1 = allUsers.get(index1);
             User user2 = allUsers.get(index2);
-            Long max = 0l;
-            Long min = 0l;
+            Long max = 0L;
+            Long min = 0L;
             if (user1.getElo() > user2.getElo())
             {
                 max = user1.getElo();
@@ -101,6 +103,7 @@ public class UserViewController {
             return Collections.emptyList();
         }
     }
+
     /*@GetMapping("/matchmaker/{startId}/{endId}")
     public String matchmaker(@PathVariable("startId") Integer startId,
                              @PathVariable("endId") Integer endId,
@@ -116,12 +119,39 @@ public class UserViewController {
         return "matchmaker";
     }
 
+    // Identifying update page so that we can update the user details from the admin side.
+    @GetMapping("/users/edit/{id}")
+    public String showUpdatePage(@PathVariable("id") Long id, Model model) {
+        // Find the user with the provided ID in the userRepository.
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + id));
+        model.addAttribute("user", user); // Add the found user object to the model with the key "user".
+        return "updateUser"; // Return the "update" view to display the user update page.
+    }
+
+    @PostMapping("/users/update/{id}")
+    public String updateUser(@PathVariable("id") Long id, @Validated User currentUser, BindingResult result,
+                                Model model) {
+        // Check if there are validation errors in the user input.
+        if (result.hasErrors()) {
+            currentUser.setId(id); // Set the ID of the currentUser to the provided ID in the path variable.
+            return "update"; // Return the "update" view to display the form with validation errors.
+        }
+
+        userRepository.save(currentUser); // Save the updated user in the userRepository.
+        model.addAttribute("users", userRepository.findAll()); // Add the list of all users to the model.
+        return "users"; // Redirect to the "/users" URL to display the updated list of users.
+    }
+
+
+    // delete a user
     @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id, Model model) {
+        // Find the user with the provided ID in the userRepository.
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User ID:" + id));
-        userRepository.delete(user);
-        model.addAttribute("users", userRepository.findAll());
-        return "redirect:/users";
+        userRepository.delete(user); // Delete the user from the userRepository.
+        model.addAttribute("users", userRepository.findAll()); // Add the list of all users to the model.
+        return "redirect:/users"; // Redirect to the "/users" URL to display the updated list of users.
     }
 }

@@ -21,18 +21,20 @@
     <th> Player Name </th>
     <th> Elo </th>
     <th> Player Toxic or Not ??? </th>
+    <th>Edit</th>
     <th>Delete</th>
   </tr>
   </thead>
   <tbody>
   <tr th:if="${users.empty}">
-    <td colspan="5"> No Users Available at this time!!! </td>
+    <td colspan="6"> No Users Available at this time!!! </td>
   </tr>
   <tr th:each="user : ${users}">
     <td><span th:text="${user.getUserName()}"> User Name </span></td>
     <td><span th:text="${user.getPlayerName()}"> player Name </span></td>
     <td><span th:text="${user.getElo()}"> Elo </span></td>
     <td><span th:text="${user.getIsToxic()}"> Toxic level </span></td>
+    <td><a th:href="@{/users/edit/{id}(id=${user.getId()})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
     <td><a th:href="@{/users/delete/{id}(id=${user.getId()})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
   </tr>
   </tbody>
