@@ -123,13 +123,11 @@ public class UserService {
    // try to keep delete as void or if you want to keep back anything then keep as boolean
 
     public void deleteUser(Long id) {
-        User currentUser;
-        try {
-            currentUser = userRepository.findUsersById(id);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        User currentUser = userRepository.findUsersById(id);
+        if (currentUser == null) {
+            throw new IllegalArgumentException("User not found with ID: " + id);
         }
-        userRepository.delete(currentUser);
+        userRepository.deleteById(id);
     }
 
     public UserModel updateUser(Long id, ModifyUserModel modifyUserModel) {
